@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Snake</title>
+		<script src="three.min.js"></script>
+		<script src="Class.js"></script>
+		<script src="SnakeConfiguration.js"></script>
+		<script src="Screen.js"></script>
+		<script src="DataBaseManager.js"></script>
+		<script src="Snake.js"></script>
+	</head>
+	<body onload="snake()">
+		<div id="scores" style="position: absolute; top: 0px; right : 0px;"></div>
+		<canvas id="3d" style="background-color:#c3c3c3;"></canvas>
+		<audio src="game-over.wav" id="audio_perdu"></audio>
+		<audio src="power-up.wav"  id="audio_pomme"></audio>
+		<script type="text/javascript">
+			function snake(){
+				new Snake();
+			}
+
+			var audio_perdu    = document.getElementById("audio_perdu");
+			var scoreDisplayer = document.getElementById("scores");
+			var audio_pomme    = document.getElementById("audio_pomme");
+		</script>
+	</body>
+</html>

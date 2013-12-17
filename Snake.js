@@ -16,11 +16,11 @@ var Snake = Class({
     	this._createAvailablePommePosition();
     	config.snakeScreen._createApple();
     	this.game = setInterval( function(){
+    		config.alreadyTurn = false;
     		that.play();
     	}, config.SPEED );
 		config.user = prompt("Nom utilisateur");
 		config.db.addUser( config.listUserKey, config.user);
-		
 		this._setApple();
     },
 
@@ -35,18 +35,21 @@ var Snake = Class({
 		}
     },
 
+    setAlreadyTurn : function( bool){
+    	this.alreadyTurn = bool;
+    },
+
     play : function(){
     	console.log('SNAKE - play');
-    	document.body.removeEventListener( "keydown", this.turn, false);
+    	//document.body.removeEventListener( "keydown", this.turn, false);
     	document.body.addEventListener( "keydown", this.turn, false);
-
+    	
 		this._tailToHead();
 		this._move();
 		this._checkLimits();
 		config.snakeScreen.refresh();
 		this._checkBittenTail(); 
 
-		console.log( config.snakeScreen)
 		if ( this._checkCollision( 
 				this.snake[ this.snake.length-1].position, 
 				config.snakeScreen.apple.position) ) 
@@ -147,7 +150,11 @@ var Snake = Class({
 
 	turn : function( event){
 		console.log('SNAKE - turn');
+		console.log( "------------------------"+this.alreadyTurn)
+		if (config.alreadyTurn) return;
+		config.alreadyTurn = true;
 		var touche = event.keyCode;
+		//document.body.removeEventListener( "keydown", this.turn, false);
 		switch ( touche){
 			case config.LEFT :
 				if ( config.XYZ == "x" && config.signe == 1) return;
@@ -185,7 +192,7 @@ var Snake = Class({
 				config.signe = 1;
 				break;
 		}
-		document.body.removeEventListener( "keydown", this.turn, false);
+		
 	}
 });
 

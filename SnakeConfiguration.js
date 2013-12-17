@@ -19,3 +19,4 @@ config.user        	= "user";
 config.listUserKey 	= "listUserKey";
 config.db 			= null;
 config.snakeScreen 	= null;
+config.alreadyTurn 	= false;
